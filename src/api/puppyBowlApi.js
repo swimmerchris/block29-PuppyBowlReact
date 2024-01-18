@@ -12,10 +12,29 @@ export const puppyBowlApi = createApi({
     baseUrl: "https://fsa-puppy-bowl.herokuapp.com/api/2310-fsa-pt-web-b/"
   }),
   // Define endpoints for our API service
+  tagTypes: ["Post"],
   endpoints: (builder) => ({
     // Define an endpoint that fetches players
     fetchPlayers: builder.query({
       query: () => "/players",
+      providesTags: ["Post"]
+    }),
+    addPlayer: builder.mutation({
+      query: (body) => {
+        console.log(body)
+        return {
+          url: "players",
+          method: "POST",
+          body
+        }
+      },
+      invalidatesTags: ["Post"]
+    }),
+    deletePlayer: builder.mutation({
+      query: (body) => ({
+        url: "/players",
+        method: "DELETE",
+      })
     })
     // The part of the URL that comes after the baseUrl for this specific endpoint
   }),
@@ -23,4 +42,4 @@ export const puppyBowlApi = createApi({
 
 // Export hooks for each endpoint - in this case, a React hook that triggers the fetchPlayers query
 
-export const { useFetchPlayersQuery } = puppyBowlApi;
+export const { useFetchPlayersQuery, useAddPlayerMutation, useDeletePlayerMutation } = puppyBowlApi;

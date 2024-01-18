@@ -73,3 +73,8 @@ body {
   font-size: 16px; /* The size of the details text. */
   text-align: center; /* The details text is centered. */
 }
+
+.player-detail > button {
+  width: 20px;
+  height: 10px;
+}
