@@ -3,7 +3,7 @@ import "../../index.css";
 import { useFetchPlayersQuery } from "../../api/puppyBowlApi";
 import { useNavigate } from "react-router-dom";
 
-const Players = () => {
+const Players = ({ foundPlayer, setFoundPlayer }) => {
   const { data = {}, error, isLoading } = useFetchPlayersQuery();
   const navigate = useNavigate();
   // Show a loading message while data is being fetched
@@ -19,20 +19,29 @@ const Players = () => {
   // Show the fetched data after it has arrived
   return (
     <div className="players">
-      {console.log(data.data)}
-      {data.data.players.map((player) => (
-        <div key={player.id} className="player-card">
-          <div className="player-button">
-            <h2> {player.name} </h2>
-            <button onClick={() => navigate(`/players/${player.id}`)}>
-              Player Details
-            </button>
-          </div>
-        </div>
-      ))}
+      {foundPlayer
+        ? foundPlayer.map((player) => (
+            <div key={player.id} className="player-card">
+              <div className="player-button">
+                <h2> {player.name} </h2>
+                <button onClick={() => navigate(`/players/${player.id}`)}>
+                  Player Details
+                </button>
+              </div>
+            </div>
+          ))
+        : data.data.players.map((player) => (
+            <div key={player.id} className="player-card">
+              <div className="player-button">
+                <h2> {player.name} </h2>
+                <button onClick={() => navigate(`/players/${player.id}`)}>
+                  Player Details
+                </button>
+              </div>
+            </div>
+          ))}
     </div>
   );
 };
 
-// Export the component so it can be imported and used in other files
 export default Players;

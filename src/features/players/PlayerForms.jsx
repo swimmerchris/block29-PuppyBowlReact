@@ -6,9 +6,9 @@ import { useAddPlayerMutation } from "../../api/puppyBowlApi";
 export default function PlayerForms() {
   const [playerName, setPlayerName] = useState("");
   const [playerBreed, setPlayerBreed] = useState("");
-  const [playerStatus, setPlayerStatus] = useState(null);
+  const [playerStatus, setPlayerStatus] = useState("");
   const [playerImage, setPlayerImage] = useState("");
-  const [playerTeam, setPlayerTeam] = useState(null);
+  const [playerTeam, setPlayerTeam] = useState("");
   const [error, setError] = useState(null);
   const [addPlayer, result] = useAddPlayerMutation();
 
@@ -16,7 +16,7 @@ export default function PlayerForms() {
     event.preventDefault();
 
     try {
-      console.log(playerStatus);
+      console.log(playerStatus, playerTeam);
       const body = {
         name: playerName,
         breed: playerBreed,
@@ -32,6 +32,7 @@ export default function PlayerForms() {
       setPlayerImage("");
       setPlayerStatus("");
       setPlayerTeam("");
+      console.log(playerStatus, playerTeam);
     } catch (error) {
       setError(error);
     }
@@ -43,8 +44,8 @@ export default function PlayerForms() {
   ];
 
   const teamOptions = [
-    { value: 1038, label: "Fluff" },
-    { value: 1039, label: "Ruff" },
+    { value: 9, label: "Fluff" },
+    { value: 10, label: "Ruff" },
   ];
 
   return (
@@ -83,7 +84,10 @@ export default function PlayerForms() {
         <Select
           className="form-select"
           options={teamOptions}
-          onChange={(choice) => setPlayerTeam(choice.value)}
+          onChange={(choice) => {
+            console.log(choice, choice.value);
+            return setPlayerTeam(choice.value);
+          }}
         />
         <button id="formButton">Submit</button>
       </form>
