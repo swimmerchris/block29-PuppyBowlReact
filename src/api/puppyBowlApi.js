@@ -31,12 +31,12 @@ export const puppyBowlApi = createApi({
       invalidatesTags: ["Post"]
     }),
     deletePlayer: builder.mutation({
-      query: (body) => ({
-        url: "/players",
+      query: (id) => ({
+        url: `/players/${id}`,
         method: "DELETE",
-      })
+      }),
+      invalidatesTags: ["Post"]
     })
-    // The part of the URL that comes after the baseUrl for this specific endpoint
   }),
 });
 

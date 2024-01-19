@@ -1,10 +1,14 @@
 import React from "react";
 import "../../index.css";
-import { useFetchPlayersQuery } from "../../api/puppyBowlApi";
+import {
+  useFetchPlayersQuery,
+  useDeletePlayerMutation,
+} from "../../api/puppyBowlApi";
 import { useNavigate } from "react-router-dom";
 
 const Players = ({ foundPlayer, setFoundPlayer }) => {
   const { data = {}, error, isLoading } = useFetchPlayersQuery();
+  const [deletePlayer] = useDeletePlayerMutation();
   const navigate = useNavigate();
   // Show a loading message while data is being fetched
   if (isLoading) {
@@ -16,7 +20,6 @@ const Players = ({ foundPlayer, setFoundPlayer }) => {
     return <div>Error Occurred</div>;
   }
 
-  // Show the fetched data after it has arrived
   return (
     <div className="players">
       {foundPlayer
@@ -36,6 +39,9 @@ const Players = ({ foundPlayer, setFoundPlayer }) => {
                 <h2> {player.name} </h2>
                 <button onClick={() => navigate(`/players/${player.id}`)}>
                   Player Details
+                </button>
+                <button onClick={() => deletePlayer(player.id)}>
+                  Delete Player
                 </button>
               </div>
             </div>
