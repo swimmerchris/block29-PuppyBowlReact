@@ -11,12 +11,11 @@ export default function SearchBar({ setFoundPlayer }) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    console.log(data.data.players);
     const player = data.data.players.filter((currentPlayer) => {
-      //   console.log(currentPlayer.name, searchName);
-      return currentPlayer.name.toLowerCase() === searchName.toLowerCase();
+      const search = searchName.toLowerCase();
+      return currentPlayer.name.toLowerCase().includes(search);
     });
-    console.log(player);
+
     if (player.length > 0) {
       setFoundPlayer(player);
     } else {
@@ -24,7 +23,7 @@ export default function SearchBar({ setFoundPlayer }) {
     }
   }
   return (
-    <div>
+    <div className="search">
       <form onSubmit={handleSubmit}>
         <label>
           Search for Player:{" "}

@@ -5,6 +5,8 @@ import {
   useDeletePlayerMutation,
 } from "../../api/puppyBowlApi";
 import { useNavigate } from "react-router-dom";
+import PlayerForms from "./PlayerForms";
+import SearchBar from "./SearchBar";
 
 const Players = ({ foundPlayer, setFoundPlayer }) => {
   const { data = {}, error, isLoading } = useFetchPlayersQuery();
@@ -21,31 +23,50 @@ const Players = ({ foundPlayer, setFoundPlayer }) => {
   }
 
   return (
-    <div className="players">
-      {foundPlayer
-        ? foundPlayer.map((player) => (
-            <div key={player.id} className="player-card">
-              <div className="player-button">
-                <h2> {player.name} </h2>
-                <button onClick={() => navigate(`/players/${player.id}`)}>
-                  Player Details
-                </button>
+    <div className="player-container">
+      <SearchBar foundPlayer={foundPlayer} setFoundPlayer={setFoundPlayer} />
+      <PlayerForms />
+      <div className="players">
+        {foundPlayer
+          ? foundPlayer.map((player) => (
+              <div key={player.id} className="player-card">
+                <div className="player-button">
+                  <h2> {player.name} </h2>
+                  <button
+                    className="detailsButton"
+                    onClick={() => navigate(`/players/${player.id}`)}
+                  >
+                    Player Details
+                  </button>
+                  <button
+                    id="deleteButton"
+                    onClick={() => deletePlayer(player.id)}
+                  >
+                    Delete Player
+                  </button>
+                </div>
               </div>
-            </div>
-          ))
-        : data.data.players.map((player) => (
-            <div key={player.id} className="player-card">
-              <div className="player-button">
-                <h2> {player.name} </h2>
-                <button onClick={() => navigate(`/players/${player.id}`)}>
-                  Player Details
-                </button>
-                <button onClick={() => deletePlayer(player.id)}>
-                  Delete Player
-                </button>
+            ))
+          : data.data.players.map((player) => (
+              <div key={player.id} className="player-card">
+                <div className="player-button">
+                  <h2> {player.name} </h2>
+                  <button
+                    className="detailsButton"
+                    onClick={() => navigate(`/players/${player.id}`)}
+                  >
+                    Player Details
+                  </button>
+                  <button
+                    id="deleteButton"
+                    onClick={() => deletePlayer(player.id)}
+                  >
+                    Delete Player
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+      </div>
     </div>
   );
 };

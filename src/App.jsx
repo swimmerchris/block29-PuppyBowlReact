@@ -4,16 +4,14 @@ import { useState } from "react";
 // Import the Players component, which we'll use to show a list of players
 import Players from "./features/players/Players";
 import PlayerDetails from "./features/players/PlayerDetails";
-import PlayerForms from "./features/players/PlayerForms";
-import SearchBar from "./features/players/SearchBar";
+import "./index.css";
 
 // Define the App component
 function App() {
   const [foundPlayer, setFoundPlayer] = useState(null);
   return (
     <div className="App">
-      <PlayerForms />
-      <SearchBar foundPlayer={foundPlayer} setFoundPlayer={setFoundPlayer} />
+      <h1 id="header">Puppy Bowl</h1>
       <Routes>
         <Route
           path="/"

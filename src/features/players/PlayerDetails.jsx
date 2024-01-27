@@ -20,10 +20,10 @@ export default function PlayerDetails() {
       <div className="player-details">
         <h2> {player.name} </h2>
         <p> {player.breed} </p>
-        <button onClick={() => navigate(`/`)} className="button">
+        <p> {player.status} </p>
+        <button onClick={() => navigate(`/`)} className="detailsButton">
           Back to Players List
         </button>
-        <p> {player.status} </p>
       </div>
     </div>
   );

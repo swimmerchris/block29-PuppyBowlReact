@@ -4,6 +4,8 @@ body {
   background-repeat: no-repeat; /* The background image will not repeat. */
   background-attachment: fixed; /* The background image will not scroll with the page. */
   background-size: cover; /* The background image will cover the entire area of the element. */
+  margin: 0;
+  padding: 0;
 }
 
 /* Styling for the introduction text of the application. */
@@ -21,13 +23,16 @@ body {
 .players {
   display: flex; /* The player cards are displayed using flexbox. */
   flex-wrap: wrap; /* The player cards will wrap onto the next line if there is not enough space. */
-  align-items: center; /* The player cards are centered on the line. */
+  justify-content: center;
+  grid-area: players;
 }
 
 /* Styling for individual player cards. */
 .player-card {
-  width: 360px;
-  height: 380px;
+  display: flex;
+  justify-content: center;
+  width: 300px;
+  /* height: 200px; */
   margin: 10px;
   background-color: rgb(135, 135, 192);
   border: 2px hidden;
@@ -44,6 +49,48 @@ body {
     0,
     -5px
   ); /* The card moves up 5 pixels when hovered over. */
+}
+
+.detailsButton {
+  margin: 10px;
+  background: linear-gradient(to right, #314755 0%, #26a0da 51%, #314755 100%);
+  padding: 5px 25px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 5px;
+}
+
+.detailsButton:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}
+
+#deleteButton {
+  margin: 10px;
+  background: linear-gradient(
+    to right,
+    hsl(3, 76%, 26%) 0%,
+    #da2626 51%,
+    #553131 100%
+  );
+  padding: 5px 25px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 5px;
+  display: block;
+}
+
+#deleteButton:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
 }
 
 /* Styling for the container that holds the player's image. */
@@ -66,15 +113,100 @@ body {
 
 /* Styling for the player's details (name, breed, status). */
 .player-details {
+  margin: 0 25%;
+  border-radius: 8px;
   flex-direction: column; /* The details are arranged in a column. */
   align-items: center; /* The details are centered along the vertical axis. */
   justify-content: center; /* The details are centered along the horizontal axis. */
   color: #000; /* The color of the details text. */
   font-size: 16px; /* The size of the details text. */
   text-align: center; /* The details text is centered. */
+  background-color: #090b45;
+  color: white;
 }
 
 .player-detail > button {
   width: 20px;
   height: 10px;
+}
+
+.signup {
+  grid-area: form;
+  grid-row: 1 / span 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #020438;
+  border-radius: 8px;
+}
+
+.signup form {
+  display: flex;
+  width: 70%;
+  flex-direction: column;
+}
+
+.signup form label,
+.signup h2 {
+  color: white;
+}
+
+.signup form input {
+  width: 100%;
+  height: 20px;
+}
+
+#formButton {
+  width: 50%;
+  align-self: center;
+  margin: 5px 0;
+  padding: 5px;
+}
+
+.player-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 4fr 4fr;
+  grid-template-areas:
+    "form form search search"
+    "form form players players"
+    "form form players players";
+}
+
+#header {
+  grid-area: header;
+  display: flex;
+  justify-content: center;
+  background-color: #090b45;
+  margin: 0;
+  padding: 0;
+  color: white;
+  height: 10%;
+  margin-bottom: 10px;
+}
+
+.search {
+  grid-area: search;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  grid-column: span 2;
+  background-color: #090b45;
+  color: white;
+}
+
+.search form {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  align-self: center;
+}
+.search form input {
+  width: 300px;
+}
+
+#form-select {
+  color: black;
 }

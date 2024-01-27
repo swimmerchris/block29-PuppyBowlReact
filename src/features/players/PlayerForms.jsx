@@ -12,11 +12,10 @@ export default function PlayerForms() {
   const [error, setError] = useState(null);
   const [addPlayer, result] = useAddPlayerMutation();
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     try {
-      console.log(playerStatus, playerTeam);
       const body = {
         name: playerName,
         breed: playerBreed,
@@ -25,14 +24,12 @@ export default function PlayerForms() {
         teamId: playerTeam,
       };
       addPlayer(body);
-      console.log(result);
 
       setPlayerName("");
       setPlayerBreed("");
       setPlayerImage("");
       setPlayerStatus("");
       setPlayerTeam("");
-      console.log(playerStatus, playerTeam);
     } catch (error) {
       setError(error);
     }
@@ -85,7 +82,6 @@ export default function PlayerForms() {
           className="form-select"
           options={teamOptions}
           onChange={(choice) => {
-            console.log(choice, choice.value);
             return setPlayerTeam(choice.value);
           }}
         />
